@@ -1,6 +1,9 @@
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Files;
+import java.nio.file.FileSystems;
 import java.util.Scanner;
-
 
 public class Crawler{
 	private String _tempPath = "";
@@ -25,6 +28,36 @@ public class Crawler{
 		//System.out.println("there are " + _numFiles + " Files");
 		//System.out.println("there are " + _numFolders + " Folders");
 		return _numFolders;
+	}
+	
+	public void deleteExt(String ext, String root){
+		Scanner sc = new Scanner(System.in);
+		File start = new File(root);
+		File[] fList = start.listFiles();
+		File[] deleteArray = start.listFiles();
+		int arrayNum = 0;
+		for (File file : fList){
+			if (file.isFile()){
+				if(file.getName().contains(ext)){
+					deleteArray[arrayNum] = file;
+					arrayNum ++;
+				}
+			}
+			else if (file.isDirectory()){
+				_numFolders++;
+				_tempPath = file.getAbsolutePath();
+			}
+		}
+		System.out.println("YOU ARE ABOUT TO DELETE " + arrayNum + " FILES! ARE YOU SURE? [Y/N]");
+		if(sc.nextLine() .equals("Y")){
+			File tempfile = null;
+			while(arrayNum != 0){
+				arrayNum = arrayNum - 1;
+				tempfile = deleteArray[arrayNum];
+				tempfile.delete();
+			}
+		}
+		
 	}
 	
 }
