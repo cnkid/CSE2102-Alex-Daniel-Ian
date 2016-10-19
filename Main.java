@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.io.File;
 
 public class Main {
 
@@ -8,16 +9,19 @@ public class Main {
 		boolean quit = false;
 		Crawler crawl = new Crawler();
 		Scanner scanInt = new Scanner(System.in);
+		ArrayList<String> list = new ArrayList<String>();
 		while(!quit){
 			System.out.println("");
 			System.out.println("");
 			System.out.println("");
 			System.out.println("Hello, please select the function you wish to perform");
 			System.out.println("1: discover and print all folders, subfolder, and files");
-			System.out.println("2: Delete files");
-			System.out.println("3: Move files");
-			System.out.println("4: Scan file type");
-			System.out.println("5: Quit program");
+			System.out.println("2: Search by file name or fragment of text");
+			System.out.println("3: Delete files by file type");
+			System.out.println("4: Move files");
+			System.out.println("5: Search by file type");
+			System.out.println("6: Delete Directory");
+			System.out.println("7: Quit program");
 			Scanner scanString = new Scanner(System.in);
 			int choice = scanInt.nextInt();
 			if(choice == 1){
@@ -28,14 +32,47 @@ public class Main {
 				crawl.crawl(root);
 			}
 			if(choice == 2){
-				System.out.println("enter root folder");
+				System.out.println("Enter root folder");
 				String root = scanString.nextLine();
+				System.out.println("Enter file name / fragment of text");
+				String text = scanString.nextLine();
 				root.replaceAll("\\\\", "\\\\\\\\");
-				crawl.deleteExt(".docx", root); //is only deleting root folder.
+				list = crawl.searchExt(text, root);
+				crawl.displayList(list);
+				crawl.reset();
+			}
+			if(choice == 3){
+				System.out.println("Enter root folder");
+				String root = scanString.nextLine();
+				System.out.println("Enter file type");
+				String text = scanString.nextLine();
+				if(!text.contains(".")){
+					text = "." + text;
+				}
+				root.replaceAll("\\\\", "\\\\\\\\");
+				list = crawl.searchExt(text, root);
+				crawl.delete(list);
+				crawl.reset();
 			}
 			if(choice == 5){
-				quit = true;
-				System.out.println("End of program");
+				System.out.println("Enter root folder");
+				String root = scanString.nextLine();
+				System.out.println("Enter file type");
+				String text = scanString.nextLine();
+				if(!text.contains(".")){
+					text = "." + text;
+				}
+				root.replaceAll("\\\\", "\\\\\\\\");
+				list = crawl.searchExt(text, root);
+				crawl.displayList(list);
+				crawl.reset();
+			}
+			if(choice == 6){
+				System.out.println("Enter root folder");
+				String root = scanString.nextLine();
+				System.err.println("Are you sure you want to delete [ " + root + " ] and all its sub directories? [Y/N]");
+				root.replaceAll("\\\\", "\\\\\\\\");
+				
 			}
 		}
 		
