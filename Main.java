@@ -29,7 +29,9 @@ public class Main {
 				System.out.println("enter root folder");
 				String root = scanString.nextLine();
 				root.replaceAll("\\\\", "\\\\\\\\");
-				crawl.crawl(root);
+				crawl = new Crawler();
+				crawl.crawl(root, true);
+				
 			}
 			if(choice == 2){
 				System.out.println("Enter root folder");
@@ -37,9 +39,9 @@ public class Main {
 				System.out.println("Enter file name / fragment of text");
 				String text = scanString.nextLine();
 				root.replaceAll("\\\\", "\\\\\\\\");
+				crawl = new Crawler();
 				list = crawl.searchExt(text, root);
 				crawl.displayList(list);
-				crawl.reset();
 			}
 			if(choice == 3){
 				System.out.println("Enter root folder");
@@ -50,9 +52,9 @@ public class Main {
 					text = "." + text;
 				}
 				root.replaceAll("\\\\", "\\\\\\\\");
+				crawl = new Crawler();
 				list = crawl.searchExt(text, root);
-				crawl.delete(list);
-				crawl.reset();
+				crawl.delete(list,false);
 			}
 			if(choice == 5){
 				System.out.println("Enter root folder");
@@ -63,20 +65,20 @@ public class Main {
 					text = "." + text;
 				}
 				root.replaceAll("\\\\", "\\\\\\\\");
+				crawl = new Crawler();
 				list = crawl.searchExt(text, root);
 				crawl.displayList(list);
-				crawl.reset();
 			}
 			if(choice == 6){
 				System.out.println("Enter root folder");
 				String root = scanString.nextLine();
-				System.err.println("Are you sure you want to delete [ " + root + " ] and all its sub directories? [Y/N]");
+				System.err.println("Are you sure you want to delete [ " + root + " ] and all its sub directories and files? [Y/N]");
 				root.replaceAll("\\\\", "\\\\\\\\");
-				
+				if((scanString.nextLine() .equals("Y")) || scanString.nextLine() .equals("y")){
+					crawl = new Crawler();
+					crawl.deleteDirectory(root);
+				}
 			}
-		}
-		
-		
+		}	
 	}
-
 }
