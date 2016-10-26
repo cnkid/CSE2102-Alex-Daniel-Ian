@@ -74,7 +74,7 @@ public class Main {
 				String root = scanString.nextLine();
 				System.err.println("Are you sure you want to delete [ " + root + " ] and all its sub directories and files? [Y/N]");
 				root.replaceAll("\\\\", "\\\\\\\\");
-				if((scanString.nextLine() .equals("Y")) || scanString.nextLine() .equals("y")){
+				if((scanString.nextLine().toUpperCase() .equals("Y"))){
 					crawl = new Crawler();
 					crawl.deleteDirectory(root);
 				}

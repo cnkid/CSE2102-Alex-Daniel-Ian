@@ -75,14 +75,15 @@ public class Crawler{
 	public void delete(ArrayList<String> list, Boolean mod){
 		Scanner sc = new Scanner(System.in);
 		if(!mod){
-			System.out.println("YOU ARE ABOUT TO DELETE " + list.size() + " FILES! ARE YOU SURE? [Y/N]");
-			this._choice = sc.nextLine();
+			System.out.println("YOU ARE ABOUT TO DELETE " + list.size() + " FILES! ARE YOU SURE? [dY/N]");
+			_choice = sc.nextLine();
 		}
 		else if(mod && _add == 0){
 			System.out.println("YOU ARE ABOUT TO DELETE " + list.size() + " FILES AND " + (_numFolders + 1) + " FOLDERS ARE YOU SURE? [Y/N]");
-			this._choice = sc.nextLine();
+			_choice = sc.nextLine();
+			_choice = _choice.toUpperCase();
 		}
-		if(((_choice.equals("Y")) || (_choice.equals("y")))){
+		if(((_choice.equals("Y")))){
 			while( list.size() > 0){
 				this._numFiles = list.size() - 1;
 				String path = list.get(this._numFiles);
