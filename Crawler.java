@@ -72,6 +72,12 @@ public class Crawler{
 		return _fileList;
 	}
 	
+	public int getSize(String root){///////////////////////////
+		int size = 0;
+		
+		return size;
+	}
+	
 	public void delete(ArrayList<String> list, Boolean mod){
 		Scanner sc = new Scanner(System.in);
 		if(!mod){
